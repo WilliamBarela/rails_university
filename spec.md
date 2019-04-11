@@ -1,4 +1,4 @@
-# Specifications for the Sinatra Assessment
+# Specifications for Rails University MVP
 
 Specs:
 - [x] Include spec.md
