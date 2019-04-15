@@ -32,4 +32,76 @@ gem update --system
 echo "gem: --no-ri --no-rdoc" >> $HOME/.gemrc
 
 gem install rails -v 5.2.3
+gem install bundler pg pry rspec
+
+# command used to set up files for Rails to use PostgreSQL (don't run):
+# rails new rails_university --database=postgresql
 ```
+
+### Create user in PostgreSQL 11  for rails_university
+
+```bash
+# create a superuser (name is your choice, but you have to use it in your config/database.yml:
+sudo -u postgres createuser -s university
+
+# drop into PostgreSQL and change your password securely:
+sudo -u postgres psql
+
+postgres=# \password university
+```
+
+### Install gems from Rails Gemfile:
+
+```bash
+bundle install
+```
+
+### Configure the config/database.yml file:
+If you are running PostgreSQL locally, make sure to inlcude the `host: localhost` statement.
+Else, you will not be able to run your setup or migrations.
+NOTA BENE: DO NOT keep your username, password, or even the name of the database in your version control.
+If you do not trust yourself with this, run `echo "config/database.yml" >> .gitignore` before your next commit.
+
+```ruby
+# vim config/database.yml
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: rails_university_development
+  username: university
+  password: FILL_IN_YOUR_PASSWORD_FOR_university_HERE
+
+test:
+  <<: *default
+  database: rails_university_test
+  username: university
+  password: FILL_IN_YOUR_PASSWORD_FOR_university_HERE
+```
+
+### Create your databases through Rails using your PostgreSQL user for the app:
+
+```bash
+# create the databases based on config/database.yml
+rake db:setup
+
+# complete your migrations
+rake db:migrate
+```
+
+### Set up is complete!
+
+You now have a working Ruby on Rails application set up with your database. If you get any errors about fileutils and ENV variables already being set, you most likely just have an old version of fileutils installed in your gems. To solve this, run:
+
+```bash
+gem uninstall fileutils
+gem update fileutils --default
+```
+
+# How to run
+to be continued ...
