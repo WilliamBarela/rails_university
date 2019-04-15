@@ -42,7 +42,7 @@ gem install bundler pg pry rspec
 
 ```bash
 # create a superuser (name is your choice, but you have to use it in your config/database.yml:
-sudo -u postgres createuser -s university
+sudo -u postgres createuser -s university 
 
 # drop into PostgreSQL and change your password securely:
 sudo -u postgres psql
@@ -103,5 +103,17 @@ gem uninstall fileutils
 gem update fileutils --default
 ```
 
-# How to run
+### Footnotes for PostgreSQL
+
+```bash
+# if you want to verify the permissions that have been granted to the PostgreSQL user
+sudo -u postgres psql
+postgres=# \du
+
+# if you want to verify in PostgreSQl that the databases have been created:
+sudo -u postgres psql
+postgres=# \l
+```
+
+## How to run
 to be continued ...
