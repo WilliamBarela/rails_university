@@ -13,5 +13,23 @@ The installation of PostgreSQL is highly dependent on the OS one chooses as is R
 - [Rails 5.2.3](https://github.com/rails/rails/tree/v5.2.3 "Rails 5.2.3")
 
 ## Set up
+### Use RVM to install Ruby 2.6.2.
 
+```bash
+rvm install 2.6.2
 
+# if you wish to use Ruby 2.6.2 by default, run:
+rvm --default use 2.6.2
+```
+
+### Install necessary Ruby gems (including Rails)
+
+```bash
+# update your gems:
+gem update --system
+
+# if you want to save disk space, run:
+echo "gem: --no-ri --no-rdoc" >> $HOME/.gemrc
+
+gem install rails -v 5.2.3
+```
