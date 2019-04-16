@@ -49,6 +49,21 @@ sudo -u postgres psql
 
 postgres=# \password university
 ```
+### Aside - Useful commands if one drops into PostgreSQL directly:
+
+```sql
+-- list all databases:
+\l
+
+-- list all roles;
+\du
+
+-- drop database:
+drop database database_name;
+
+-- drop role:
+drop role database_role;
+```
 
 ### Install gems from Rails Gemfile:
 
