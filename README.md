@@ -8,6 +8,7 @@ The underlying database which has been chosen for this project is PostgreSQL due
 The installation of PostgreSQL is highly dependent on the OS one chooses as is RVM. Once these dependencies are met, please skip to the set up section for detail on how correctly set up and configure PostgreSQL and RVM.
 
 - [PostgreSQL 11](https://www.postgresql.org/download/ "PostgreSQL 11")
+- [PostgreSQL 11 Installation](https://wiki.postgresql.org/wiki/Apt "PostgreSQL 11 Installation")
 - [RVM](https://rvm.io/ "RVM")
 - [Ruby 2.6.2](https://www.ruby-lang.org/en/ "Ruby 2.6.2")
 - [Rails 5.2.3](https://github.com/rails/rails/tree/v5.2.3 "Rails 5.2.3")
