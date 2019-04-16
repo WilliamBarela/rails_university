@@ -158,4 +158,8 @@ Assuming you followed the steps in the above set up exactly, you can follow the 
 mv config/database.yml.bak config/database.yml
 ```
 
+### Read about encrypted credentials in Rails 5.2
+
+- [Rails Encrypted](https://www.engineyard.com/blog/rails-encrypted-credentials-on-rails-5.2 "Rails Encrypted Credentials")
+
 to be continued ...
