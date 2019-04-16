@@ -163,3 +163,10 @@ mv config/database.yml.bak config/database.yml
 - [Rails Encrypted](https://www.engineyard.com/blog/rails-encrypted-credentials-on-rails-5.2 "Rails Encrypted Credentials")
 
 to be continued ...
+
+## Additional Useful Links
+
+- [Rails and Postgresql](https://medium.com/@frouster/ruby-on-rails-postgresql-f1b037924bdf "Rails & PostgreSQL with Useful Commands")
+- [PostgreSQL 11 Documentation](https://www.postgresql.org/docs/11/index.html "PostgreSQL 11 Documentation")
+- [PostgreSQL 11 Client Applications](https://www.postgresql.org/docs/11/reference-client.html "PostgreSQL 11 Client Applications")
+- [Dockerize PostgreSQL](https://docs.docker.com/engine/examples/postgresql_service/ "Dockerize PostgreSQL")
