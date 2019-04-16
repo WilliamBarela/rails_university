@@ -170,3 +170,5 @@ to be continued ...
 - [PostgreSQL 11 Documentation](https://www.postgresql.org/docs/11/index.html "PostgreSQL 11 Documentation")
 - [PostgreSQL 11 Client Applications](https://www.postgresql.org/docs/11/reference-client.html "PostgreSQL 11 Client Applications")
 - [Dockerize PostgreSQL](https://docs.docker.com/engine/examples/postgresql_service/ "Dockerize PostgreSQL")
+- [Secure TCP/IP Connections with SSH Tunnels](https://www.postgresql.org/docs/11/ssh-tunnels.html "Secure TCP/IP Connections with SSH Tunnels")
+- [PostgreSQL Security](https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps "PostgreSQL Security (dated, but useful)")
