@@ -77,7 +77,7 @@ Else, you will not be able to run your setup or migrations.
 NOTA BENE: DO NOT keep your username, password, or even the name of the database in your version control.
 If you do not trust yourself with this, run `echo "config/database.yml" >> .gitignore` before your next commit.
 
-```ruby
+```yml
 # vim config/database.yml
 
 default: &default
