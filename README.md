@@ -148,5 +148,13 @@ Please heed the warning in `db/schema.rb` when trying to recreate your database 
 # It's strongly recommended that you check this file into your version control system.
 ```
 
-## How to run
+## How to use
+
+### Move `config/database.yml.bak`
+Assuming you followed the steps in the above set up exactly, you can follow the subsequent steps to get running
+
+```bash
+mv config/database.yml.bak config/database.yml
+```
+
 to be continued ...
