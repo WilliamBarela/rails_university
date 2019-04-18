@@ -29,3 +29,6 @@
 # Ignore config/database.yml
 /config/database.yml
 !/config/database.yml.bak
+
+# Ignore .rake_tasks
+.rake_tasks~
