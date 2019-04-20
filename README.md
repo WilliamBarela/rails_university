@@ -195,7 +195,7 @@ This ensures uniqueness of any given UUID; however, it comes at the cost of secu
 
 Version-4 UUIDs are randomly generated ids which are composed of 128bits, six of which are used to indicate the version and varient.
 There are not guaranteed to be unique due to the random nature of their generation; however, the probabily of generating a UUID which causes a collision is so exceedingly low that for all intents and purposes, they may be considered unique.
-The [uuid probability](https://en.wikipedia.org/wiki/Universally_unique_identifier "probability") of finding a single duplicate in 103 x 10^12 UUIDs is about one in a billion.
+The [probability](https://en.wikipedia.org/wiki/Universally_unique_identifier "uuid probability") of finding a single duplicate in 103 x 10^12 UUIDs is about one in a billion.
 Thus, given the scale of the population of a large university department (or even a university for that matter) over the course of a lifetime, it is exceedingly unlikely that a collision will be generated using version-4 UUIDs as primary keys.
 
 PostgreSQL 11's module "pgcrypto" offers a version-4 UUID generator which can be used for making primary keys. Ruby on Rails also allows for this integration.
