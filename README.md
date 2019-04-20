@@ -149,6 +149,34 @@ Please heed the warning in `db/schema.rb` when trying to recreate your database 
 # It's strongly recommended that you check this file into your version control system.
 ```
 
+## Design Decisions
+
+In creating this web application, following Rails convention over configuration ideology was followed as closely as possible.
+However, there are several considerations for longivity, ease of migration upon EOL of the various components of the application and scalability which caused me to overide some conventions which Rails has as default.
+This section will list those additional configuration (some which are Rails specific and some which are PostgreSQL specific).
+
+### Using UUIDs for All Simple Primary Keys for All Tables
+
+When developing a database, one must take into consideration several factors when choosing primary keys. Space is a limiting factor and indeed one of the primary concerns.
+However, in the spirit of being forward looking for scaling purposes, thinking about future growth of your database and migrations, it is important to choose a primary key which has a low probability of collissions.
+Another very important issue is to consider is security. Using a "natural key" such as a national identification number, or a student ID in a database might be convenient.
+However, since these items would cause a security risk in case your database were compromised, it is a very poor and lazy practice for a database such as that of a university department's website (which should only be a means of presenting information).
+As a result, in this generalized rails application, I have chosen to use a "surrogate key", in specific UUIDs, for all simple primary keys in all tables.
+Universally Unique Identifiers, UUIDs, have had various standards which have been developed over the years and which continue to be used.
+
+Version-1 UUIDs are generated using the creation timestamp of a record and the MAC address of the node (i.e., the computer generating the UUID).
+This ensures uniqueness of any given UUID; however, it comes at the cost of security as any given UUID publishes the MAC address of the computer with your database.
+
+Version-4 UUIDs are randomly generated ids which are composed of 128bits, six of which are used to indicate the version and varient.
+There are not guaranteed to be unique due to the random nature of their generation; however, the probabily of generating a UUID which causes a collision is so exceedingly low that for all intents and purposes, they may be considered unique.
+The [uuid probability](https://en.wikipedia.org/wiki/Universally_unique_identifier "probability"") of finding a single duplicate in 103 x 10^12 UUIDs is about one in a billion.
+Thus, given the scale of the population of a large university department (or even a university for that matter) over the course of a lifetime, it is exceedingly unlikely that a collision will be generated using version-4 UUIDs as primary keys.
+
+PostgreSQL 11's module "pgcrypto" offers a version-4 UUID generator which can be used for making primary keys. Ruby on Rails also allows for this integration.
+
+- [pgcrypto with Rails](https://lab.io/articles/2017/04/13/uuids-rails-5-1/ "Using pgcrypto in Rails")
+- [PostgreSQL pgcrypto](https://www.postgresql.org/docs/current/pgcrypto.html "PostgreSQL pgcrypto module for generating UUIDs")
+
 ## How to use
 
 ### Move `config/database.yml.bak`
