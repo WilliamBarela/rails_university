@@ -53,9 +53,6 @@ postgres=# \password university
 ### Aside - Useful commands if one drops into PostgreSQL directly:
 
 ```sql
--- list all databases:
-\l
-
 -- list all roles;
 \du
 
@@ -64,7 +61,36 @@ drop database database_name;
 
 -- drop role:
 drop role database_role;
+
+-- list all databases:
+\l
+
+-- connect to a database
+\c university_development
+
+-- describe database (i.e., show tables)
+\d
+
+-- describe a table (i.e., show columns of a given table:
+\d a_tables_name
+
+-- show just a list of columns/fields of a given table:
+SELECT
+  COLUMN_NAME
+FROM
+  information_schema.COLUMNS
+WHERE
+  TABLE_NAME = 'cats';
 ```
+
+One can connect to the database directly using psql in the CLI:
+
+```bash
+psql -h localhost_or_database_host -p database_port -U postgresql_user database_name
+```
+
+- [PostgreSQL Tutorials](https://www.tutorialspoint.com/postgresql/postgresql_select_database.htm "PostgreSQL Tutorials")
+- [PostgreSQL data types](https://www.postgresql.org/docs/11/datatype-numeric.html "PostgreSQL data types")
 
 ### Install gems from Rails Gemfile:
 
@@ -169,7 +195,7 @@ This ensures uniqueness of any given UUID; however, it comes at the cost of secu
 
 Version-4 UUIDs are randomly generated ids which are composed of 128bits, six of which are used to indicate the version and varient.
 There are not guaranteed to be unique due to the random nature of their generation; however, the probabily of generating a UUID which causes a collision is so exceedingly low that for all intents and purposes, they may be considered unique.
-The [uuid probability](https://en.wikipedia.org/wiki/Universally_unique_identifier "probability"") of finding a single duplicate in 103 x 10^12 UUIDs is about one in a billion.
+The [uuid probability](https://en.wikipedia.org/wiki/Universally_unique_identifier "probability") of finding a single duplicate in 103 x 10^12 UUIDs is about one in a billion.
 Thus, given the scale of the population of a large university department (or even a university for that matter) over the course of a lifetime, it is exceedingly unlikely that a collision will be generated using version-4 UUIDs as primary keys.
 
 PostgreSQL 11's module "pgcrypto" offers a version-4 UUID generator which can be used for making primary keys. Ruby on Rails also allows for this integration.
