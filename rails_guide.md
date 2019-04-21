@@ -85,10 +85,11 @@ The opposite of this is completed by running `rake db:drop`.
 Now, back to migrations. Again, to emphasize, migrations perform non-record level operations on your database. Hence, you can create or drop tables with them, create or drop columns/fields, but no record level opearations are performed (i.e., CRUD operations which are handled by Models).
 They also serve as a somewhat basic version control system for defining and reverting non-record based changes. That said, when migrating a database to a new server, one should not use these migrations as this could be faulty. It is better to make a database dump to use on the new system.
 
-#### CREATE TABLE
+#### `CREATE TABLE users (id bigint PRIMARY KEY, name character varying, age integer, is_star_trek_fan boolean);`
 
-##### `rails g migration Create___User___ name:string age:integer is_star_trek_fan:boolean`
+##### `rails g migration Create___Users___ name:string age:integer is_star_trek_fan:boolean`
 Using `rails g migration CreateZZZ` followed by a set of key value pairs will invoke active_record and generate a new table ZZZ to be set up in your database with columns/fields for each key of the data type specified by the value.
+
 ```bash
 Running via Spring preloader in process 8962
       invoke  active_record
@@ -96,7 +97,6 @@ Running via Spring preloader in process 8962
 ```
 
 Thus, only one file is generated, the one in `db/migrate`
-
 This is the associated `db/migrate/*_create_user.rb` file:
 
 ```ruby
@@ -113,5 +113,17 @@ end
 
 To actually create the table in your database, you then need to run `rake db:migrate` which invokes the outstanding migrations.
 If you decide that you did not want to do this, you can run `rake db:rollback` which will attempt to reverse the migrations just performed.
+If you decide that you also want to delete all files associated with the migration, then run `rails d migration CreateUser`.
 
+#### `ALTER TABLE users ADD COLUMN last_name character varying;`
 
+##### `rails g migration Add___LastName___ToUsers last_name:string`
+Using `rails g migration AddYYYToUsers` followed by a key value pair of the column/field to add and the data type will generate a migration which upon invoking `rake db:migrate` will add column YYY to the table `users`.
+
+```bash
+```
+Again, as migration generator, this will only generate one file in db/migrate
+The associated file is `db/migrate/*_add_last_name_to_user.rb
+
+```ruby
+```
