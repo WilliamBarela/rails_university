@@ -74,8 +74,8 @@ All generators are invoked through the cli with this syntax: `rails generate` an
 A shortcut for this is `rails g` and then the generator you require.
 
 This section will focus on the basics of this. One very useful flag which one can pass to `rail g` is the `-p` flag which will give you a preview of what the migration will do.
-If you wish to delete all files associated with the migration, you can pass the `-d` flag at the end of the migration statement which refers to the migration you made.
-Pass the `-d` flag will not rollback migrations which you have completed using `rake db:migrate`! So, be careful with passing this flag and make sure that you have rolled back any associated migrations; else, you will need to connect to your databased and do the clean up manually.
+If you wish to delete all files associated with the migration, you instead invoke `rails d migration` on the referent migration.
+Running `rails d migration` will not rollback migrations which you have completed using `rake db:migrate`! So, be careful when invoking this command and make sure that you have rolled back any associated migrations; else, you will need to connect to your databased and do the clean up manually.
 
 ### Migrations
 Although they are not strictly migrations, it is important to know how to create databases and drop databases from Rails.
@@ -100,6 +100,15 @@ Thus, only one file is generated, the one in `db/migrate`
 This is the associated `db/migrate/*_create_user.rb` file:
 
 ```ruby
+class CreateUser < ActiveRecord::Migration[5.2]
+  def change
+    create_table :users do |t|
+      t.string :name
+      t.integer :age
+      t.boolean :is_star_trek_fan
+    end
+  end
+end
 ```
 
 To actually create the table in your database, you then need to run `rake db:migrate` which invokes the outstanding migrations.
