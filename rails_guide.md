@@ -180,9 +180,40 @@ rails g migration AddLastNameToUsers last_name:string
 Using `rails g migration AddYYYToUsers` followed by a key value pair of the column/field to add and the data type will generate a migration which upon invoking `rake db:migrate` will add column YYY to the table `users`.
 
 ```bash
+Running via Spring preloader in process 9029
+      invoke  active_record
+      create    db/migrate/20190421071910_add_last_name_to_users.rb
 ```
 Again, as migration generator, this will only generate one file in db/migrate
 The associated file is `db/migrate/*_add_last_name_to_user.rb`
 
 ```ruby
+class AddLastNameToUsers < ActiveRecord::Migration[5.2]
+  def change
+    add_column :users, :last_name, :string
+  end
+end
 ```
+The structure produced by the SQL and Rails is the follow:
+
+```sql
+university_development=#
+SELECT
+  COLUMN_NAME, DATA_TYPE
+FROM
+  information_schema.COLUMNS
+WHERE
+  TABLE_NAME = 'users';
+
+-- output
+
+   column_name    |     data_type
+------------------+-------------------
+ id               | bigint
+ name             | character varying
+ age              | integer
+ is_star_trek_fan | boolean
+ last_name        | character varying
+(5 rows)
+```
+Further information about migrations in Rails can be found in the **Active Record Migrations** docs.
