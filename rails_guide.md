@@ -75,6 +75,7 @@ A shortcut for this is `rails g` and then the generator you require.
 
 This section will focus on the basics of this. One very useful flag which one can pass to `rail g` is the `-p` flag which will give you a preview of what the migration will do.
 If you wish to delete all files associated with the migration, you can pass the `-d` flag at the end of the migration statement which refers to the migration you made.
+Pass the `-d` flag will not rollback migrations which you have completed using `rake db:migrate`! So, be careful with passing this flag and make sure that you have rolled back any associated migrations; else, you will need to connect to your databased and do the clean up manually.
 
 ### Migrations
 Although they are not strictly migrations, it is important to know how to create databases and drop databases from Rails.
@@ -84,7 +85,9 @@ The opposite of this is completed by running `rake db:drop`.
 Now, back to migrations. Again, to emphasize, migrations perform non-record level operations on your database. Hence, you can create or drop tables with them, create or drop columns/fields, but no record level opearations are performed (i.e., CRUD operations which are handled by Models).
 They also serve as a somewhat basic version control system for defining and reverting non-record based changes. That said, when migrating a database to a new server, one should not use these migrations as this could be faulty. It is better to make a database dump to use on the new system.
 
-#### `rails g migration Create___User___ name:string age:integer is_star_trek_fan:boolean`
+#### CREATE TABLE
+
+##### `rails g migration Create___User___ name:string age:integer is_star_trek_fan:boolean`
 Using `rails g migration CreateZZZ` followed by a set of key value pairs will invoke active_record and generate a new table ZZZ to be set up in your database with columns/fields for each key of the data type specified by the value.
 ```bash
 Running via Spring preloader in process 8962
@@ -94,6 +97,12 @@ Running via Spring preloader in process 8962
 
 Thus, only one file is generated, the one in `db/migrate`
 
+This is the associated `db/migrate/*_create_user.rb` file:
+
+```ruby
+```
+
 To actually create the table in your database, you then need to run `rake db:migrate` which invokes the outstanding migrations.
 If you decide that you did not want to do this, you can run `rake db:rollback` which will attempt to reverse the migrations just performed.
+
 
