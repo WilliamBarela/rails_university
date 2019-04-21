@@ -85,7 +85,11 @@ The opposite of this is completed by running `rake db:drop`.
 Now, back to migrations. Again, to emphasize, migrations perform non-record level operations on your database. Hence, you can create or drop tables with them, create or drop columns/fields, but no record level opearations are performed (i.e., CRUD operations which are handled by Models).
 They also serve as a somewhat basic version control system for defining and reverting non-record based changes. That said, when migrating a database to a new server, one should not use these migrations as this could be faulty. It is better to make a database dump to use on the new system.
 
-#### `CREATE TABLE users (id bigint PRIMARY KEY, name character varying, age integer, is_star_trek_fan boolean);`
+#### SQL
+
+##### `CREATE TABLE users (id bigint PRIMARY KEY, name character varying, age integer, is_star_trek_fan boolean);`
+
+#### Rails generator equivalent:
 
 ##### `rails g migration Create___Users___ name:string age:integer is_star_trek_fan:boolean`
 Using `rails g migration CreateZZZ` followed by a set of key value pairs will invoke active_record and generate a new table ZZZ to be set up in your database with columns/fields for each key of the data type specified by the value.
@@ -109,6 +113,38 @@ class CreateUser < ActiveRecord::Migration[5.2]
     end
   end
 end
+```
+The resultant table which is created in PostgreSQL can be seen below. It is the same for both the SQL as well as the Rail generator:
+
+```sql
+university_development=# 
+SELECT
+  COLUMN_NAME, DATA_TYPE
+FROM
+  information_schema.COLUMNS
+WHERE
+  TABLE_NAME = 'users';
+
+-- output:
+
+   column_name    |     data_type
+------------------+-------------------
+ id               | bigint
+ name             | character varying
+ age              | integer
+ is_star_trek_fan | boolean
+(4 rows)
+
+university_development=# \d users_pkey
+
+-- output: 
+
+      Index "public.users_pkey"
+ Column |  Type  | Key? | Definition
+--------+--------+------+------------
+ id     | bigint | yes  | id
+primary key, btree, for table "public.users"
+
 ```
 
 To actually create the table in your database, you then need to run `rake db:migrate` which invokes the outstanding migrations.
