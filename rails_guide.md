@@ -280,3 +280,69 @@ end
 ```
 
 Thus, if one invokes `rake log db:migrate` or `rake log db:rollback`, one can see exactly what rails has done and what SQL command was used to complete a particular migration.
+
+### Data types available in PostgreSQL and implemented in Ruby on Rails:
+From Rails ActiveRecord > connection adapters > postgresql adapter
+
+```ruby
+class PostgreSQLAdapter < AbstractAdapter
+  ADAPTER_NAME = "PostgreSQL"
+
+  ##
+  # :singleton-method:
+  # PostgreSQL allows the creation of "unlogged" tables, which do not record
+  # data in the PostgreSQL Write-Ahead Log. This can make the tables faster,
+  # but significantly increases the risk of data loss if the database
+  # crashes. As a result, this should not be used in production
+  # environments. If you would like all created tables to be unlogged in
+  # the test environment you can add the following line to your test.rb
+  # file:
+  #
+  #   ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.create_unlogged_tables = true
+  class_attribute :create_unlogged_tables, default: false
+
+  NATIVE_DATABASE_TYPES = {
+    primary_key: "bigserial primary key",
+    string:      { name: "character varying" },
+    text:        { name: "text" },
+    integer:     { name: "integer", limit: 4 },
+    float:       { name: "float" },
+    decimal:     { name: "decimal" },
+    datetime:    { name: "timestamp" },
+    time:        { name: "time" },
+    date:        { name: "date" },
+    daterange:   { name: "daterange" },
+    numrange:    { name: "numrange" },
+    tsrange:     { name: "tsrange" },
+    tstzrange:   { name: "tstzrange" },
+    int4range:   { name: "int4range" },
+    int8range:   { name: "int8range" },
+    binary:      { name: "bytea" },
+    boolean:     { name: "boolean" },
+    xml:         { name: "xml" },
+    tsvector:    { name: "tsvector" },
+    hstore:      { name: "hstore" },
+    inet:        { name: "inet" },
+    cidr:        { name: "cidr" },
+    macaddr:     { name: "macaddr" },
+    uuid:        { name: "uuid" },
+    json:        { name: "json" },
+    jsonb:       { name: "jsonb" },
+    ltree:       { name: "ltree" },
+    citext:      { name: "citext" },
+    point:       { name: "point" },
+    line:        { name: "line" },
+    lseg:        { name: "lseg" },
+    box:         { name: "box" },
+    path:        { name: "path" },
+    polygon:     { name: "polygon" },
+    circle:      { name: "circle" },
+    bit:         { name: "bit" },
+    bit_varying: { name: "bit varying" },
+    money:       { name: "money" },
+    interval:    { name: "interval" },
+    oid:         { name: "oid" },
+      }
+```
+
+[PostgreSQL Data Types Implemented in RoR](https://github.com/rails/rails/blob/master/activerecord/lib/active_record/connection_adapters/postgresql_adapter.rb#L69 "PostgreSQL Data Types Implemented in RoR")
