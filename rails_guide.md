@@ -217,6 +217,18 @@ WHERE
 (5 rows)
 ```
 `rails g migration RemoveLastNameFromUsers` will generate a migration which will remove the last_name field from the users table.
-If one would like to associate a foreign key with one of the fields of the table, one can run: `rails g migration AddUserRefToProducts user:references`.
+
+If one would like to associate a foreign key with one of the fields of the table, one can run: `rails g migration AddPersonRefToOrders person:references`. The equivalent of this in PostgreSQL if one were to make the table:
+
+```sql
+CREATE TABLE Orders (
+    OrderID int NOT NULL PRIMARY KEY,
+    OrderNumber int NOT NULL,
+    PersonID int REFERENCES Persons(PersonID)
+);
+```
 Further information about migrations in Rails can be found in the **Active Record Migrations** docs.
+
+### Models
+
 
