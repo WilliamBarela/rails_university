@@ -227,6 +227,11 @@ CREATE TABLE Orders (
     PersonID int REFERENCES Persons(PersonID)
 );
 ```
+
+#### Creating a Join Table
+
+`rails g migration CreateJoinTableCustomerProduct customer product`
+
 Further information about migrations in Rails can be found in the **Active Record Migrations** docs.
 
 ### Models
