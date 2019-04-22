@@ -263,6 +263,12 @@ Models also add a timestamp to the migration files by default (which does not ha
 ### Useful Rake Task Added in this Code Base
 
 All migrations must be invoked using `rake`. If one uses `rails` instead, it will still work because rails will route the migration to rake to complete the database operation which needs to be completed.
+To see what rake tasks are available by default, please run 
+
+```bash
+rake --tasks
+```
+
 However, oftentimes one might wonder what SQL was used to generate the particular migration which you invoked using either `rake db:migrate` or `rake db:rollback`.
 
 There is a rake task which has been added to lib/tasks/log.rake:
