@@ -230,7 +230,16 @@ CREATE TABLE Orders (
 
 #### Creating a Join Table
 
-`rails g migration CreateJoinTableCustomerProduct customer product`
+##### SQL
+```sql
+CREATE TABLE "customer_products" (
+  "customer_id" bigint NOT NULL, 
+  "product_id" bigint NOT NULL);
+```
+##### Rails generator equivalent:
+```bash
+rails g migration CreateJoinTableCustomerProduct customer product
+```
 
 Further information about migrations in Rails can be found in the **Active Record Migrations** docs.
 
@@ -250,3 +259,18 @@ Running via Spring preloader in process 10249
 ```
 
 Models also add a timestamp to the migration files by default (which does not happen when you create a stand alone migration).
+
+### Useful Rake Task Added in this Code Base
+
+All migrations must be invoked using `rake`. If one uses `rails` instead, it will still work because rails will route the migration to rake to complete the database operation which needs to be completed.
+However, oftentimes one might wonder what SQL was used to generate the particular migration which you invoked using either `rake db:migrate` or `rake db:rollback`.
+
+There is a rake task which has been added to lib/tasks/log.rake:
+
+```ruby
+task :log => :environment do
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
+end
+```
+
+Thus, if one invokes `rake log db:migrate` or `rake log db:rollback`, one can see exactly what rails has done and what SQL command was used to complete a particular migration.
