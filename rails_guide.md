@@ -231,4 +231,17 @@ Further information about migrations in Rails can be found in the **Active Recor
 
 ### Models
 
+Model generators must be invoked using the singular. Models generate the migration (plural) in `db/migration/`, the model (singular) in `app/models/` and testing units by default.
 
+```bash
+rails g model User first_name:string last_name:string age:integer
+Running via Spring preloader in process 10249
+      invoke  active_record
+      create    db/migrate/20190422003414_create_users.rb
+      create    app/models/user.rb
+      invoke    test_unit
+      create      test/models/user_test.rb
+      create      test/fixtures/users.yml
+```
+
+Models also add a timestamp to the migration files by default (which does not happen when you create a stand alone migration).
