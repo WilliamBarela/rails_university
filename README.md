@@ -39,6 +39,8 @@ gem install bundler pg pry rspec
 # rails new rails_university --database=postgresql
 ```
 
+For more basic information on using Rails, please see both the short `rails_guide.md` which was written for this project and the Official Rails Guide.
+
 ### Create user in PostgreSQL 11  for rails_university
 
 ```bash
@@ -74,9 +76,9 @@ drop role database_role;
 -- describe a table (i.e., show columns of a given table:
 \d a_tables_name
 
--- show just a list of columns/fields of a given table:
+-- show just a list of columns/fields and data types of a given table:
 SELECT
-  COLUMN_NAME
+  COLUMN_NAME, DATA_TYPE
 FROM
   information_schema.COLUMNS
 WHERE
